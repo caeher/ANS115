@@ -1,0 +1,105 @@
+﻿// UNIVERSIDAD DE EL SALVADOR 
+// Materia: Analisis Numerico 
+// Tema : 4.Derivación e Integración Numérica
+//Este algoritmo es para Calcular una integral por el metodo de cuadratura 
+//Gaussiana
+clc;
+funcprot(0);
+ieee(2);
+TRUE = 1;
+FALSE = 0; 
+printf('Este es el metodo de Cuadratura Gaussiana.\n\n');
+printf('Ingrese la funcion F(x) en terminos de x\n');
+printf('Por ejemplo: cos(x)\n');
+ F = input('y =',"s")    // Almacena la funcion ingresada en f
+deff('y=F(x)','y= '+F);
+OK = FALSE;
+ while OK == FALSE 
+    printf('Ingrese el limite inferior de integracion ''a'' y ');
+    printf('el limite superior de integracion ''b''\n');
+    printf('en lineas separadas\n');
+    A = input(' ');
+    B = input(' ');
+    if A > B 
+        printf('El limite inferior ''a'' debe de ser menor que el limite superior ''b''\n');
+    else
+        OK = TRUE;
+    end
+ end 
+ OK = FALSE;
+ while OK == FALSE 
+    printf('Ingrese un numero entero positivo N entre 2 y 5.\n');
+    N = input(' ');
+     if N >=2 & N <= 5 
+        OK = TRUE;
+     else
+        printf('La entrada tiene que ser un numero positivo entre 2 y 5\n');
+     end
+ end
+ //PASO 1
+ K=(B-A)/2;
+ //PASO 2
+ //X = inline(s,'t');
+ // F = input('y =',"s")    // Almacena la funcion ingresada en f
+//deff('X=F(t)','X=((B-A)*t+(B+A))/2');
+
+  //PASO 3
+ if N==2
+     C1=1;
+     C2=1;
+     t1=0.5773502692;
+     t2=-0.5773502692;
+     X1=((B-A)*t1+(B+A))/2;
+     X2=((B-A)*t2+(B+A))/2;
+     I=K*(C1*F(X1)+C2*F(X2));
+ else
+     //PASO 4  
+     if N==3
+         C1=0.5555555556;
+         C2=0.8888888889;
+         C3=0.5555555556;
+         t1=0.7745966692;
+         t2=0.0000000000;
+         t3=-0.7745966692;
+         X1=((B-A)*t1+(B+A))/2;
+         X2=((B-A)*t2+(B+A))/2;
+         X3=((B-A)*t3+(B+A))/2;
+         I=K*(C1*F(X1)+C2*F(X2)+C3*F(X3));
+     else
+         if N==4
+             C1=0.3478548451;
+             C2=0.6521451549;
+             C3=0.6521451549;
+             C4=0.3478548451;
+             t1=0.8611363116;
+             t2=0.3399810436;
+             t3=-0.3399810436;
+             t4=-0.8611363116;
+             X1=((B-A)*t1+(B+A))/2;
+             X2=((B-A)*t2+(B+A))/2;
+             X3=((B-A)*t3+(B+A))/2;
+             X4=((B-A)*t4+(B+A))/2;
+             I=K*(C1*F(X1)+C2*F(X2)+C3*F(X3)+C4*F(X4));
+         else
+             C1=0.2369268851;
+             C2=0.4786286705;
+             C3=0.5688888889;
+             C4=0.4786286705;
+             C5=0.2369268851;
+             t1=0.9061798459;
+             t2=0.5384693101;
+             t3=0.0000000000;
+             t4=-0.5384693101;
+             t5=-0.9061798459;
+             X1=((B-A)*t1+(B+A))/2;
+             X2=((B-A)*t2+(B+A))/2;
+             X3=((B-A)*t3+(B+A))/2;
+             X4=((B-A)*t4+(B+A))/2;
+             X5=((B-A)*t5+(B+A))/2;
+             I=K*(C1*F(X1)+C2*F(X2)+C3*F(X3)+C4*F(X4)+C5*F(X5));
+         end
+     end
+ end
+ printf('\nEL integral de F de %32.28f a %32.28f \n', A, B);
+ printf('con N igual a %d\n',N);
+ printf('es :------->%32.28f\n', I);
